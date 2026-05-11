@@ -1,0 +1,72 @@
+---
+sidebar_position: 2
+---
+
+# usage
+
+```plain text
+$./fastDbg
+      ___           ___           ___           ___           ___           ___           ___
+     /\  \         /\  \         /\  \         /\  \         /\  \         /\  \         /\  \
+    /::\  \       /::\  \       /::\  \        \:\  \       /::\  \       /::\  \       /::\  \
+   /:/\:\  \     /:/\:\  \     /:/\ \  \        \:\  \     /:/\:\  \     /:/\:\  \     /:/\:\  \
+  /::\~\:\  \   /::\~\:\  \   _\:\~\ \  \       /::\  \   /:/  \:\__\   /::\~\:\__\   /:/  \:\  \
+ /:/\:\ \:\__\ /:/\:\ \:\__\ /\ \:\ \ \__\     /:/\:\__\ /:/__/ \:|__| /:/\:\ \:|__| /:/__/_\:\__\
+ \/__\:\ \/__/ \/__\:\/:/  / \:\ \:\ \/__/    /:/  \/__/ \:\  \ /:/  / \:\~\:\/:/  / \:\  /\ \/__/
+      \:\__\        \::/  /   \:\ \:\__\     /:/  /       \:\  /:/  /   \:\ \::/  /   \:\ \:\__\
+       \/__/        /:/  /     \:\/:/  /     \/__/         \:\/:/  /     \:\/:/  /     \:\/:/  /
+                   /:/  /       \::/  /                     \::/__/       \::/__/       \::/  /
+                   \/__/         \/__/                       ~~            ~~            \/__/
+Error: Must specify either -f <file> OR -p <pid> OR -qemu
+
+Usage: ./fastDbg [OPTIONS]
+
+Userland Debugging:
+  -f <file>    Debug executable file
+  -p <pid>     Attach to running process
+
+Kernel Debugging (QEMU):
+  -qemu              Enable QEMU kernel debugging
+  -qemu-host <host>  QEMU GDB server host (default: localhost)
+  -qemu-port <port>  QEMU GDB server port (default: 12345)
+```
+
+## userland
+
+### launch process
+
+```plain text
+./fastDbg -f <file>
+```
+
+
+### attach to existing process
+
+```plain text
+sudo ./fastDbg -p <pid>
+```
+
+## kernel
+
+default: host=localhost, port=12345
+
+```plain text
+./fastDbg -qemu
+```
+
+example debuggee
+
+```bash
+#!/bin/bash
+qemu-system-x86_64 \
+-gdb tcp::12345 \
+-m 128M \
+-kernel ./bzImage \
+-initrd ./rootfs.cpio \
+-append "console=ttyS0 loglevel=3 oops=panic panic_on_warn=1 kpti" \
+-monitor /dev/null \
+-nographic \
+-cpu qemu64,+smep,+smap \
+-smp 1 \
+-no-reboot
+```

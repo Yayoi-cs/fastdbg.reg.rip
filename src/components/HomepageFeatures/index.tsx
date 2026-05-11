@@ -11,32 +11,31 @@ type FeatureItem = {
 
 const FeatureList: FeatureItem[] = [
   {
-    title: 'Easy to Use',
-    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
+    title: '69 commands available',
+    Svg: require('@site/static/img/bash-icon.svg').default,
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+          fastDbg has a various kind of commands focus on the exploitation.
+          Including advanced commands such as visual-heap, bins, findruction, pagetable, etc.
       </>
     ),
   },
   {
-    title: 'Focus on What Matters',
-    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
+    title: 'userland+kernel',
+    Svg: require('@site/static/img/linux-tux.svg').default,
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+          fastDbg supports native binary+kernel debugging with qemu with classy color syntax.
+          fastDbg supports glibc 2.28~2.41.
       </>
     ),
   },
   {
-    title: 'Powered by React',
-    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
+    title: 'Powered by Golang',
+    Svg: require('@site/static/img/Go-Logo_Blue.svg').default,
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        Worker, Parser, all were written in golang. Works faster with go routine parallelization.
       </>
     ),
   },
